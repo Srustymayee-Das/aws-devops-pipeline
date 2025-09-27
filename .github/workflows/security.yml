@@ -1,0 +1,9 @@
+name: Security
+on: [push, pull_request]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: aquasecurity/tfsec-action@v1.0.0
+    - run: cd app && docker build -t scan . && docker run --rm aquasec/trivy image scan
